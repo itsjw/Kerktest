@@ -1,0 +1,5 @@
+.background {
+    background: url('../img/signpost.jpg') center;
+    background-size: cover;
+    filter: blur(3px);
+}

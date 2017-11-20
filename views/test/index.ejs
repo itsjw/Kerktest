@@ -1,0 +1,32 @@
+<html>
+    <% include ../basics/head %>
+    <body>
+        <% include ../basics/header %>
+        <div class="container">
+            <% questionKeys.forEach(function(key) {%>
+                <div class="panel">
+                    
+                    <h3 class="title">
+                            <%= key %>. <%= questions[key].description%>
+                    </h3>
+                    <div class="">
+                        <% Object.keys(questions[key].answers).forEach(function(answer) {%>
+                            <div class="column">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <h6><%= answer%></h6>
+                                        <p><%= questions[key].answers[answer].text%></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <%});%>
+                    </div>
+                </div>
+            <% });%>
+            <button class="button is-success is-medium is-fullwidth">Vraag resultaat op</button>
+        </div>
+
+        <% include ../basics/footer %>
+
+    </body>
+</html>
