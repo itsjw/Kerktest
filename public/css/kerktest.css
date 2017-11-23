@@ -3,3 +3,10 @@
     background-size: cover;
     filter: blur(3px);
 }
+
+.test-answer {
+    cursor: pointer;
+}
+.selected {
+    background-color: red;
+}

@@ -23,6 +23,23 @@ app.get('/test', (req, res) => {
     res.render('test/index', {questionKeys, questions});
 });
 
+app.get('/result', (req, res) => {
+    let result = require('./calculator')(req.query);
+    let churches = require('./data/churches');
+
+    let orderedList = [];
+    for (const churchId of Object.keys(result)) {
+        orderedList.push({
+            church: churches[churchId],
+            relevance: result[churchId]
+        });
+    }
+
+    orderedList.sort((a, b) => a.relevance < b.relevance);
+    //res.send(orderedList);
+    res.render('result/index', {result: orderedList})
+});
+
 app.get('*', (req, res) => {
     res.render('404');
 });
