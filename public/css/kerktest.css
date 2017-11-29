@@ -2,6 +2,7 @@
     background: url('../img/signpost.jpg') center;
     background-size: cover;
     filter: blur(3px);
+
 }
 
 .test-answer {
@@ -9,4 +10,36 @@
 }
 .selected {
     background-color: red;
+}
+
+.main-title {
+    border-radius: 7px;
+    position: relative;
+    padding: 10px;
+    margin: auto 0;
+    font-style: oblique;
+}
+
+.main-title h1 {
+    font-weight: bolder;
+    color: rgba(0, 0, 0, 0.68);
+}
+.main-title h2 {
+    font-weight: bold;
+    color: rgba(11, 8, 8, 0.75);
+}
+
+.welcome p {
+    font-size: 1.3em;
+    font-style: oblique;
+    font-weight: 500;
+}
+
+#main_text {
+    background-image: url('../img/signpost.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
 }

@@ -1,22 +1,35 @@
 <html>
     <% include ../basics/head %>
     <body>
-        <% include ../basics/header %>
-        <div class="container">
-            <div class="columns">
-                <div class="column">
-                    <% include welcome %>
-
-                    
-                </div>  
-                <div class="column">
-                    <div class="panel">
-                        
-                        <a href="./test"><button class="is-warning is-large is-fullwidth button">Doe de test</button></a>
+        <!-- Text content -->
+        <section class="hero is-fullheight" id="main_text">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="container main-title has-text-centered">
+                        <h1 class="title">Bent u op zoek? </h1>
+                        <h2 class="subtitle"> naar een christelijke gemeenschap waar u zich mee verbonden voelt?</h2>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <a href="./test"><button class="is-warning is-large is-centered button is-fullwidth">Doe de test</button></a>
+                        </div>
+                    </div>
+                    <div class="has-text-centered">
+                        <i class="fa fa-angle-double-down fa-5x" aria-hidden="true"></i>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                    <% include welcome %>
+                </div>
+                <hr/>
+                <a href="./test"><button class="is-warning is-large is-centered button is-fullwidth">Doe de test</button></a>
+            </div>
+        </section>
+
         <% include ../basics/footer %>
     </body>
 </html>
