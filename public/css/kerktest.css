@@ -35,8 +35,22 @@
     font-weight: 500;
 }
 
+.special-text {
+    font-style: oblique;
+    font-weight: 200;
+}
+
 #main_text {
     background-image: url('../img/signpost.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+#lower_text {
+    background-image: url('../img/together.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
