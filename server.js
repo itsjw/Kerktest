@@ -1,7 +1,16 @@
 let express = require('express');
+let session = require('express-session');
 
 // Create the app
 const app = express();
+app.set('trust proxy', 1);
+app.use(session({
+    secret: 'my-secret',
+    resave: false,
+    saveUninitialized: false
+}));
+
+const questions = require('./data/questions.js');
 
 // Set the view engine we use to render html
 app.set('view engine', 'ejs');
@@ -17,10 +26,45 @@ app.get('/', (req, res) => {
     res.render('home/index');
 });
 
+const createSession = function(req) {
+    if (!req.session.questions) {
+        let qu = Object.keys(questions).map(x => ({id: x, selected: false}));
+        req.session.questions = qu;
+    }
+}
+
+app.get('/test/:id/', (req, res) => {
+    let questionId = req.params.id;
+
+
+    if (questionId in questions) {
+
+        createSession(req);
+
+        res.render('test/question', {questionId: questionId, question: questions[questionId], questionStatus: (req.session.questions || [])});
+    } else {
+        res.redirect('/test');
+    }
+});
+
+app.post('/test/:id/:answer/', (req, res) => {
+    let questionId = req.params.id;
+    let answer = req.params.answer;
+
+    if (questionId in questions && answer in questions[questionId].answers) {
+        createSession(req);
+        req.session.questions[questionId - 1].selected = answer;
+
+        res.status(202);
+        res.send({error: false, message: 'Answer accepted'});
+    } else {
+        res.status(405);
+        res.send({error: true, message: 'invalid parameter(s)'});
+    }
+});
+
 app.get('/test', (req, res) => {
-    let questions = require('./data/questions.js');
-    let questionKeys = Object.keys(questions);
-    res.render('test/index', {questionKeys, questions});
+    res.redirect('/test/1');
 });
 
 app.get('/result', (req, res) => {

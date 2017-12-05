@@ -2,14 +2,26 @@
     background: url('../img/signpost.jpg') center;
     background-size: cover;
     filter: blur(3px);
-
 }
 
-.test-answer {
+#header {
+    background: url('../img/signpost.jpg') center;
+    background-size: cover;
+}
+
+.answer-section {
+    min-height: 400px;
+}
+
+.answer {
     cursor: pointer;
 }
 .selected {
-    background-color: red;
+    background-color: #ffbdbd;
+}
+
+.selected span {
+    color: black;
 }
 
 .main-title {
@@ -56,4 +68,13 @@
     background-position: center;
     background-repeat: no-repeat;
     z-index: -2;
+}
+
+#question-status {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#question-status .status {
+    flex: 1;
 }
