@@ -69,7 +69,7 @@ const questions = {
       answers: {
         "A": {text: "Hoe een mens bekeerd kan worden, om zo rechtvaardig te zijn voor God.", influence: [4]},
         "B": {text: "Hoe een mens tot eer van God kan leven.", influence: [1, 3, 6, 7]},
-        "C": {text: "Hoe een mens in liefde om kan zien naar zijn medemens.", influence: [2, 5]},,
+        "C": {text: "Hoe een mens in liefde om kan zien naar zijn medemens.", influence: [2, 5]},
         "D": {text: "Geen mening.", influence: []}
       }
     },
@@ -149,7 +149,7 @@ const questions = {
       answers: {
         "A": {text: "Er bestaan een hemel en een hel.", influence: [1, 3, 4, 6, 7]},
         "B": {text: "Alleen de hemel bestaat, en iedereen zal hier naartoe gaan.", influence: [2, 5]},
-        "C": {text: "Alleen de hemel bestaat. Mensen die hier niet naartoe gaan, zullen worden vernietigd.", influence: [8]},,
+        "C": {text: "Alleen de hemel bestaat. Mensen die hier niet naartoe gaan, zullen worden vernietigd.", influence: [8]},
         "D": {text: "Geen mening.", influence: []}
       }
     },
@@ -159,7 +159,7 @@ const questions = {
         "A": {text: "De rustdag is op zaterdag. Een christen behoort zich net als de joden te houden aan het vierde gebod: ‘Gedenk de sabbatdag, dat u die heiligt.’ ", influence: [8]},
         "B": {text: "De rustdag is op zondag. Door op zondag niet te werken en zich meer dan op andere dagen op God te concentreren, neemt een christen het vierde gebod in acht: ‘Gedenk de sabbatdag, dat u die heiligt.’ ", influence: [1, 3, 4]},
         "C": {text: "Een christen hoeft zich niet aan een rustdag te houden, maar het is wel een goed idee om een dag in de week uit te rusten.", influence: [2, 5, 6, 7]},
-        "D": {text: "Geen mening, influence: []
+        "D": {text: "Geen mening", influence: []}
       }
     },
     "18": {
