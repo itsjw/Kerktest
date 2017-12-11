@@ -35,13 +35,12 @@ const createSession = function(req) {
 
 app.get('/test/:id/', (req, res) => {
     let questionId = req.params.id;
-
-
+    let warning = "w" in req.query || false;
     if (questionId in questions) {
 
         createSession(req);
 
-        res.render('test/question', {questionId: questionId, question: questions[questionId], questionStatus: (req.session.questions || [])});
+        res.render('test/question', {warning: warning, questionId: questionId, question: questions[questionId], questionStatus: (req.session.questions || [])});
     } else {
         res.redirect('/test');
     }
@@ -64,25 +63,64 @@ app.post('/test/:id/:answer/', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
+    req.session.questions = false;
     res.redirect('/test/1');
 });
 
 app.get('/result', (req, res) => {
-    let result = require('./calculator')(req.query);
-    let churches = require('./data/churches');
+    createSession(req);
 
-    let orderedList = [];
-    for (const churchId of Object.keys(result)) {
-        orderedList.push({
-            church: churches[churchId],
-            relevance: result[churchId]
-        });
+    let s;
+    for (const e of req.session.questions) {
+        if (!e.selected) {
+            // redirect to unanswered question.
+            res.redirect("/test/" + e.id + "?w=1");
+            return;
+        }
     }
 
-    orderedList.sort((a, b) => a.relevance < b.relevance);
-    //res.send(orderedList);
+    s = req.session.questions.map(x => x.selected ? x.selected : '-').join('');
+    res.redirect('/result/' + s);
+
+});
+
+// Sessionless
+app.get('/result/:res/', (req, res) => {
+
+    // Seed the initial list with 0
+    let answerString = req.params.res || "";
+    let amountOfQuestions = Object.keys(questions).length;
+    if (answerString.length > amountOfQuestions) {
+        answerString = answerString.slice(0, 4);
+    } else if (answerString.length < amountOfQuestions) {
+        answerString += "-".repeat(amountOfQuestions - answerString);
+    }
+
+    let answers = answerString.split('').map((x, i) => ({id: (i + 1), selected: x == '-' ? false : x}));
+    let result = require('./calculator')(answers);
+    let churches = require('./data/churches');
+
+    // {[id:number]: {church: string, relevance: 0}}
+    let filled = {};
+
+    for (const churchId of Object.keys(churches)) {
+        filled[churchId] = {
+            church: churches[churchId],
+            relevance: 0
+        };
+    }
+
+    for (const churchId of Object.keys(result)) {
+        filled[churchId].relevance = result[churchId];
+    }
+
+    let orderedList = Object.keys(filled).map(i => filled[i]);
+
+   orderedList.sort((a, b) => a.relevance < b.relevance);
+
     res.render('result/index', {result: orderedList})
 });
+
 
 app.get('*', (req, res) => {
     res.render('404');
