@@ -26,6 +26,17 @@ app.get('/', (req, res) => {
     res.render('home/index');
 });
 
+//Handle pages kerken, overons, contact
+app.get('/kerken', (req, res) => {
+    res.render('kerken');
+});
+app.get('/overons', (req, res) => {
+    res.render('overons');
+});
+app.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
 const createSession = function(req) {
     if (!req.session.questions) {
         let qu = Object.keys(questions).map(x => ({id: x, selected: false}));
